@@ -27,5 +27,16 @@ describe('Wunderlist', () => {
         yield GH.ClickLinkAndCheckUrl(PO.linkSignIn, urlSignIn);
         yield GH.ClickLinkAndCheckUrl(PO.linkSwitchToDo, urlSwitch);
     }));
+    it('Check Sign In process', () => __awaiter(void 0, void 0, void 0, function* () {
+        const email = 'nincs@ilyen.cim', password = 'randomPass', errMsg = `Expected alert didn't show up in time: '${GH.signInErrMsg}'`;
+        yield protractor_1.browser.wait(protractor_1.ExpectedConditions.presenceOf(PO.linkSignIn), 10000);
+        yield PO.linkSignIn.click();
+        yield protractor_1.browser.wait(protractor_1.ExpectedConditions.presenceOf(PO.inputEmail), 10000);
+        yield PO.inputEmail.sendKeys(email);
+        yield PO.inputPassword.sendKeys(password);
+        yield PO.buttonSignIn.click();
+        yield protractor_1.browser.wait(protractor_1.ExpectedConditions.visibilityOf(PO.divSignInError), 10000, errMsg);
+        expect(yield PO.divSignInError.getText()).toEqual(GH.signInErrMsg);
+    }));
 });
 //# sourceMappingURL=app.js.map

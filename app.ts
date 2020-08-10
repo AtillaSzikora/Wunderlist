@@ -1,4 +1,4 @@
-import { browser } from 'protractor';
+import { browser, ExpectedConditions as EC } from 'protractor';
 import * as PO from './PageObjects'
 import * as GH from './GenericHelper';
 
@@ -23,5 +23,21 @@ describe('Wunderlist', () => {
         await GH.ClickLinkAndCheckUrl(PO.linkMicrosoftToDo, urlHome);
         await GH.ClickLinkAndCheckUrl(PO.linkSignIn, urlSignIn);
         await GH.ClickLinkAndCheckUrl(PO.linkSwitchToDo, urlSwitch);
+    });
+
+    it('Check Sign In process', async () => {
+        const
+            email = 'nincs@ilyen.cim',
+            password = 'randomPass',
+            errMsg = `Expected alert didn't show up in time: '${GH.signInErrMsg}'`;
+
+        await browser.wait(EC.presenceOf(PO.linkSignIn), 10000);
+        await PO.linkSignIn.click();
+        await browser.wait(EC.presenceOf(PO.inputEmail), 10000);
+        await PO.inputEmail.sendKeys(email);
+        await PO.inputPassword.sendKeys(password);
+        await PO.buttonSignIn.click();
+        await browser.wait(EC.visibilityOf(PO.divSignInError), 10000, errMsg);
+        expect(await PO.divSignInError.getText()).toEqual(GH.signInErrMsg);
     });
 });
