@@ -39,6 +39,9 @@
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="GenericHelper.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="PageObjects.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
