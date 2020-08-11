@@ -46,8 +46,29 @@ describe('Wunderlist UI tests', () => {
         await GH.CompareTableValues();
     });
 
-    it('Check if the Blog contains important titles.');
-    it('Switch STEP 2  - Learn More - fails');
+    it('Check steps for switch to Microsoft To Do', async () => {
+        const
+            errMsg = `Button '${PO.buttonGetToDoFromMicrosoft.locator().value}' did not load at '${GH.urlGetToDo}'`,
+            errSiteCantBeReached = 'This site can’t be reached',
+            importAccountText = 'Import your Wunderlist account to Microsoft To Do',
+            GetTabs = async () => await browser.getAllWindowHandles();
+
+        await GH.ClickField(PO.menuSwitchToDo)
+        await GH.ClickField(PO.buttonGetToDo);
+        await browser.wait(EC.elementToBeClickable(PO.buttonGetToDoFromMicrosoft), 10000, errMsg);
+
+        await browser.navigate().back();
+        await GH.ClickField(PO.buttonLearnMore);
+        await browser.switchTo().window((await GetTabs())[1]);
+        await browser.wait(EC.visibilityOf(PO.divSiteError), 10000);
+        expect(await PO.divSiteError.getText()).not.toEqual(errSiteCantBeReached); // << fails intentionally
+
+        await browser.switchTo().window((await GetTabs())[0]);
+        await GH.ClickField(PO.buttonGetMoreInfo);
+        await browser.switchTo().window((await GetTabs())[2]);
+        await browser.wait(EC.visibilityOf(PO.divImportSiteHeader), 10000);
+        expect(await PO.divImportSiteHeader.getText()).toEqual(importAccountText);
+    });
 
     xit('Filter down support topics', async () => {
         const searchText = 'privacy';

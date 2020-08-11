@@ -51,8 +51,22 @@ describe('Wunderlist UI tests', () => {
     it('Comparison of Wunderlist and Microsoft To Do features', () => __awaiter(void 0, void 0, void 0, function* () {
         yield GH.CompareTableValues();
     }));
-    it('Check if the Blog contains important titles.');
-    it('Switch STEP 2  - Learn More - fails');
+    it('Check steps for switch to Microsoft To Do', () => __awaiter(void 0, void 0, void 0, function* () {
+        const errMsg = `Button '${PO.buttonGetToDoFromMicrosoft.locator().value}' did not load at '${GH.urlGetToDo}'`, errSiteCantBeReached = 'This site can’t be reached', importAccountText = 'Import your Wunderlist account to Microsoft To Do', GetTabs = () => __awaiter(void 0, void 0, void 0, function* () { return yield protractor_1.browser.getAllWindowHandles(); });
+        yield GH.ClickField(PO.menuSwitchToDo);
+        yield GH.ClickField(PO.buttonGetToDo);
+        yield protractor_1.browser.wait(protractor_1.ExpectedConditions.elementToBeClickable(PO.buttonGetToDoFromMicrosoft), 10000, errMsg);
+        yield protractor_1.browser.navigate().back();
+        yield GH.ClickField(PO.buttonLearnMore);
+        yield protractor_1.browser.switchTo().window((yield GetTabs())[1]);
+        yield protractor_1.browser.wait(protractor_1.ExpectedConditions.visibilityOf(PO.divSiteError), 10000);
+        expect(yield PO.divSiteError.getText()).not.toEqual(errSiteCantBeReached); // << fails intentionally
+        yield protractor_1.browser.switchTo().window((yield GetTabs())[0]);
+        yield GH.ClickField(PO.buttonGetMoreInfo);
+        yield protractor_1.browser.switchTo().window((yield GetTabs())[2]);
+        yield protractor_1.browser.wait(protractor_1.ExpectedConditions.visibilityOf(PO.divImportSiteHeader), 10000);
+        expect(yield PO.divImportSiteHeader.getText()).toEqual(importAccountText);
+    }));
     xit('Filter down support topics', () => __awaiter(void 0, void 0, void 0, function* () {
         const searchText = 'privacy';
         yield protractor_1.browser.wait(protractor_1.ExpectedConditions.presenceOf(PO.menuSupport), 10000);

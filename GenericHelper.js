@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CompareTableValues = exports.ClickField = exports.ClickLinkAndCheckUrl = exports.comparisonTableData = exports.comparisonTableRowSelector = exports.signInErrorMsg = exports.signInErrorAlert = exports.password = exports.email = exports.urlContact = exports.urlTermsOfUse = exports.urlPrivacyPolicy = exports.urlImprint = exports.urlSignIn = exports.urlSwitch = exports.urlBlog = exports.urlSupport = exports.urlHome = exports.urlBase = void 0;
+exports.CompareTableValues = exports.ClickField = exports.ClickLinkAndCheckUrl = exports.comparisonTableData = exports.comparisonTableRowSelector = exports.signInErrorMsg = exports.signInErrorAlert = exports.password = exports.email = exports.urlGetToDo = exports.urlContact = exports.urlTermsOfUse = exports.urlPrivacyPolicy = exports.urlImprint = exports.urlSignIn = exports.urlSwitch = exports.urlBlog = exports.urlSupport = exports.urlHome = exports.urlBase = void 0;
 const protractor_1 = require("protractor");
 // URLs
-exports.urlBase = 'https://www.wunderlist.com/', exports.urlHome = '/home', exports.urlSupport = 'todosupport.helpshift.com/a/microsoft-to-do/?p=web', exports.urlBlog = '/blog/', exports.urlSwitch = 'switch', exports.urlSignIn = 'login?redirect_url=/home', exports.urlImprint = '/imprint/', exports.urlPrivacyPolicy = '/privacy-policy/', exports.urlTermsOfUse = '/terms-of-use/', exports.urlContact = '/contact/', 
+exports.urlBase = 'https://www.wunderlist.com/', exports.urlHome = '/home', exports.urlSupport = 'todosupport.helpshift.com/a/microsoft-to-do/?p=web', exports.urlBlog = '/blog/', exports.urlSwitch = 'switch', exports.urlSignIn = 'login?redirect_url=/home', exports.urlImprint = '/imprint/', exports.urlPrivacyPolicy = '/privacy-policy/', exports.urlTermsOfUse = '/terms-of-use/', exports.urlContact = '/contact/', exports.urlGetToDo = '/microsoft-to-do-lists-tasks-reminders/9nblggh5r558?rtc=1&activetab=pivot:overviewtab', 
 // Misc texts
 exports.email = 'nincs@ilyen.cim', exports.password = 'randomPass', exports.signInErrorAlert = 'The email or password you entered was incorrect. Please try again.', exports.signInErrorMsg = `Expected alert didn't show up in time: '${exports.signInErrorAlert}'`, 
 // Comparison table values

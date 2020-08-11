@@ -12,6 +12,7 @@ export const
     urlPrivacyPolicy = '/privacy-policy/',
     urlTermsOfUse = '/terms-of-use/',
     urlContact = '/contact/',
+    urlGetToDo = '/microsoft-to-do-lists-tasks-reminders/9nblggh5r558?rtc=1&activetab=pivot:overviewtab',
 
     // Misc texts
     email = 'nincs@ilyen.cim',

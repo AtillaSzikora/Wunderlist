@@ -26,5 +26,12 @@ export const
 
     // Support page fields
     inputSearch = $('form > input.search-input.hide-on-mobile'),
-    searchResults = $$('div.search-results-wrapper > div > ul.faq-list > li > a');
+    searchResults = $$('div.search-results-wrapper > div > ul.faq-list > li > a'),
 
+    // Switch to To Do page fields
+    buttonGetToDo = $('#step-1 > div > div.section-intro > a'),
+    buttonLearnMore = $('#step-2 > div > div.section-intro > a'),
+    buttonGetMoreInfo = $('#step-3 > div > div.section-intro > a'),
+    buttonGetToDoFromMicrosoft = $('#buttonPanel_AppIdentityBuyButton'),
+    divSiteError = $('#main-message > h1'),
+    divImportSiteHeader = $('#supArticleContent h1');
