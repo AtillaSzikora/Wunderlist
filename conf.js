@@ -1,7 +1,7 @@
 exports.config = {
 
     specs: [
-        'app.js'
+        'UITests.js'
     ],
     jasmineNodeOpts: {
         showColors: true

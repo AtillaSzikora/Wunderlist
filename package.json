@@ -2,7 +2,7 @@
   "name": "wunderlist",
   "version": "0.0.0",
   "description": "Wunderlist",
-  "main": "app.js",
+  "main": "UITests.js",
   "author": {
     "name": ""
   },
