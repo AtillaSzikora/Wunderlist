@@ -1,4 +1,4 @@
-import { $, element, by } from 'protractor';
+import { $, $$, element, by } from 'protractor';
 
 export const
     // Menu bar links
@@ -22,4 +22,9 @@ export const
     footerTermsOfUse = element(by.cssContainingText('div.footer.center a', 'Terms of Use')),
     footerContact = element(by.cssContainingText('div.footer.center a', 'Contact')),
     footerBlog = element(by.cssContainingText('div.footer.center a', 'Blog')),
-    footerSupport = element(by.cssContainingText('div.footer.center a', 'Support'));
+    footerSupport = element(by.cssContainingText('div.footer.center a', 'Support')),
+
+    // Support page fields
+    inputSearch = $('form > input.search-input.hide-on-mobile'),
+    searchResults = $$('div.search-results-wrapper > div > ul.faq-list > li > a');
+

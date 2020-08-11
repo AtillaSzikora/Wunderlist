@@ -1,11 +1,15 @@
-import { browser, ExpectedConditions as EC } from 'protractor';
+import { browser, ExpectedConditions as EC, $ } from 'protractor';
 import * as PO from './PageObjects'
 import * as GH from './GenericHelper';
 
-describe('Wunderlist', () => {
+describe('Wunderlist UI tests', () => {
     beforeAll(async () => {
         await browser.navigate().to(GH.urlBase);
         await browser.waitForAngularEnabled(false);
+    });
+
+    beforeEach(async () => {
+        if (await browser.getCurrentUrl() != GH.urlBase) await browser.navigate().to(GH.urlBase);
     });
 
     it('Check if all menu bar links lead to the right sub page.', async () => {
@@ -18,7 +22,7 @@ describe('Wunderlist', () => {
         await GH.ClickLinkAndCheckUrl(PO.menuSwitchToDo, GH.urlSwitch);
     });
 
-    it('Check if the Sign In shows the correct error when user/pass is wrong.', async () => {
+    it('Check if Sign In shows the correct error when user/pass is wrong.', async () => {
         await browser.wait(EC.presenceOf(PO.menuSignIn), 10000);
         await PO.menuSignIn.click();
         await browser.wait(EC.presenceOf(PO.inputEmail), 10000);
@@ -38,8 +42,20 @@ describe('Wunderlist', () => {
         await GH.ClickLinkAndCheckUrl(PO.footerSupport, GH.urlSupport);
     });
 
-    it('Filter down support topics');
-    it('Check if hte Blog contain important titles.');
-    it('Comparison of Wunderlist and Microsoft To Do in /home#mydaySection');
-    it('Switch STEP 2  - Learn More fails')
+    it('Comparison of Wunderlist and Microsoft To Do features', async () => {
+        await GH.CompareTableValues();
+    });
+
+    it('Check if the Blog contains important titles.');
+    it('Switch STEP 2  - Learn More - fails');
+
+    xit('Filter down support topics', async () => {
+        const searchText = 'privacy';
+
+        await browser.wait(EC.presenceOf(PO.menuSupport), 10000);
+        await PO.menuSupport.click();
+        await PO.inputSearch.sendKeys(searchText);
+        await browser.wait(EC.presenceOf(PO.searchResults.get(0)), 10000);
+        await PO.searchResults.each(async result => expect(await result.getText()).toContain(searchText));
+    });
 });

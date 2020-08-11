@@ -12,10 +12,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const protractor_1 = require("protractor");
 const PO = require("./PageObjects");
 const GH = require("./GenericHelper");
-describe('Wunderlist', () => {
+describe('Wunderlist UI tests', () => {
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         yield protractor_1.browser.navigate().to(GH.urlBase);
         yield protractor_1.browser.waitForAngularEnabled(false);
+    }));
+    beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
+        if ((yield protractor_1.browser.getCurrentUrl()) != GH.urlBase)
+            yield protractor_1.browser.navigate().to(GH.urlBase);
     }));
     it('Check if all menu bar links lead to the right sub page.', () => __awaiter(void 0, void 0, void 0, function* () {
         yield GH.ClickLinkAndCheckUrl(PO.menuWunderlist, GH.urlHome);
@@ -26,7 +30,7 @@ describe('Wunderlist', () => {
         yield GH.ClickLinkAndCheckUrl(PO.menuSignIn, GH.urlSignIn);
         yield GH.ClickLinkAndCheckUrl(PO.menuSwitchToDo, GH.urlSwitch);
     }));
-    it('Check if the Sign In shows the correct error when user/pass is wrong.', () => __awaiter(void 0, void 0, void 0, function* () {
+    it('Check if Sign In shows the correct error when user/pass is wrong.', () => __awaiter(void 0, void 0, void 0, function* () {
         yield protractor_1.browser.wait(protractor_1.ExpectedConditions.presenceOf(PO.menuSignIn), 10000);
         yield PO.menuSignIn.click();
         yield protractor_1.browser.wait(protractor_1.ExpectedConditions.presenceOf(PO.inputEmail), 10000);
@@ -44,9 +48,18 @@ describe('Wunderlist', () => {
         yield GH.ClickLinkAndCheckUrl(PO.footerBlog, GH.urlBlog);
         yield GH.ClickLinkAndCheckUrl(PO.footerSupport, GH.urlSupport);
     }));
-    it('Filter down support topics');
-    it('Check if hte Blog contain important titles.');
-    it('Comparison of Wunderlist and Microsoft To Do in /home#mydaySection');
-    it('Switch STEP 2  - Learn More fails');
+    it('Comparison of Wunderlist and Microsoft To Do features', () => __awaiter(void 0, void 0, void 0, function* () {
+        yield GH.CompareTableValues();
+    }));
+    it('Check if the Blog contains important titles.');
+    it('Switch STEP 2  - Learn More - fails');
+    xit('Filter down support topics', () => __awaiter(void 0, void 0, void 0, function* () {
+        const searchText = 'privacy';
+        yield protractor_1.browser.wait(protractor_1.ExpectedConditions.presenceOf(PO.menuSupport), 10000);
+        yield PO.menuSupport.click();
+        yield PO.inputSearch.sendKeys(searchText);
+        yield protractor_1.browser.wait(protractor_1.ExpectedConditions.presenceOf(PO.searchResults.get(0)), 10000);
+        yield PO.searchResults.each((result) => __awaiter(void 0, void 0, void 0, function* () { return expect(yield result.getText()).toContain(searchText); }));
+    }));
 });
 //# sourceMappingURL=UITests.js.map
